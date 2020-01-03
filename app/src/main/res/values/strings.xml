@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+    <string name="allowing_this_permission_will_help">Allowing this permission will help us improve
+        your app experience. You can turn it off later at any time from Settings.</string>
+    <string name="ok">OK</string>
+    <string name="empty_folder">Empty Folder</string>
+    <string name="select_all">Select All</string>
+    <string name="all_files_title">All Files</string>
+    <string name="files_title">Files</string>
+    <string name="permission_error">Please grant file read write permission from settings to proceed further.</string>
+    <string name="date_format1">dd MMMM yyyy</string>
+    <string name="backup_error1">%d Folders are not backup</string>
+    <string name="backup_error_actiontext1">BACKUP NOW</string>
+    <string name="backup_success1">All files and folders are up to date.</string>
+    <string name="skip_for_now">Skip For Now</string>
+    <string name="backup_now">Backup Now</string>
+</resources>

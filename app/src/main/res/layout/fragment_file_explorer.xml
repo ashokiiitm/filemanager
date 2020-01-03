@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f6f7f9">
+
+    <TextView
+        android:id="@+id/titleItem1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/filesListRv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/tondo_bold"
+        android:textColor="@color/color_656566"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/iv3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/filesListRv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@android:drawable/ic_input_add"/>
+
+    <ImageView
+        android:id="@+id/iv2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintRight_toLeftOf="@id/iv3"
+        app:layout_constraintBottom_toTopOf="@id/filesListRv"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintRight_toLeftOf="@id/iv2"
+        app:layout_constraintBottom_toTopOf="@id/filesListRv"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/selectAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:padding="7dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/filesListRv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/select_all"
+        android:textAllCaps="true"
+        android:textColor="@color/color_5788eb"
+        android:textSize="12sp"
+        android:fontFamily="@font/tondo_bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/filesListRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleItem1"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/actionPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/color_ffffff"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        android:layout_marginTop="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true">
+            <TextView
+                android:id="@+id/skipNow"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/skip_for_now"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:textColor="@color/color_979797"
+                android:fontFamily="@font/tondo_bold"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"/>
+            <TextView
+                android:id="@+id/backupNow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/backup_now"
+                android:textAllCaps="true"
+                android:layout_margin="@dimen/dp12"
+                android:padding="@dimen/dp12"
+                android:gravity="center"
+                android:textColor="@color/color_ffffff"
+                android:background="@drawable/rounded_bg_blue"
+                android:fontFamily="@font/tondo_bold"
+                android:drawableStart="@drawable/ic_backup"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="@string/empty_folder"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
