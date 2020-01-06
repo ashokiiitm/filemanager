@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import filemanager.data.FileModel
 import filemanager.fragment.FileExplorerFragment
 import filemanager.fragment.FileExplorerFragment.Companion.ARG_PATH
+import filemanager.utils.FileUtils
 import filemanager.utils.PermissionManager
 import filemanager.viewmodel.FileViewModel
 
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         if (!mPermissionManager.havePermission(applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE, null)) {
             permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             isPermissionGranted = false
-            Log.d("permissions", "has permission false")
         }
         if (permissionList.size > 0) {
             var strings = permissionList.toTypedArray()
@@ -49,12 +49,10 @@ class MainActivity : AppCompatActivity() {
                 this,
                 object : PermissionManager.PermissionGrantListener {
                     override fun onPermissionDenied() {
-                        Log.d("permissions", "onPermissionDenied")
                         showPermissionErrorView()
                     }
 
                     override fun onPermissionReceived() {
-                        Log.d("permissions", "onPermissionReceived")
                         showMainView()
                         initFragment()
                     }
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     fun initFragment() {
         val fileexpfrag = FileExplorerFragment()
         val args = Bundle()
-        args.putString(ARG_PATH, Environment.getExternalStorageDirectory().absolutePath)
+        args.putString(ARG_PATH, FileUtils.MediaType.ROOT.name)
         fileexpfrag.arguments = args
         supportFragmentManager.beginTransaction()
             .add(R.id.fragmentContainer, fileexpfrag, fileexpfrag.javaClass.simpleName)

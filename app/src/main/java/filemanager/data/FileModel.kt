@@ -1,5 +1,6 @@
 package filemanager.data
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import filemanager.utils.FileUtils
 import kotlinx.android.parcel.Parcelize
@@ -16,5 +17,7 @@ data class FileModel(
     var extension: String = "",
     var subFiles: Int = 0,
     var lastModified : Long = 0,
+    var _id : Long = 0,
+    var mBitmap : Bitmap? = null,
     var isSelected : Boolean = false
 ) : Parcelable

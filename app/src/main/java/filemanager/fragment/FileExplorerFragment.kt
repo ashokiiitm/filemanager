@@ -1,11 +1,10 @@
 package filemanager.fragment
 
-import android.Manifest
 import android.app.Activity
-import android.content.Context
+import android.app.ProgressDialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.text.TextUtils
+import android.os.Handler
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -25,14 +24,12 @@ import com.google.android.material.snackbar.Snackbar
 import filemanager.adapter.FilesRvAdapter
 import filemanager.data.FileModel
 import filemanager.utils.FileUtils
-import filemanager.utils.FileUtils.Companion.convertFileToModel
-import filemanager.utils.FileUtils.Companion.getFiles
-import filemanager.utils.PermissionManager
 import filemanager.viewmodel.FileViewModel
-import kotlinx.android.synthetic.main.file_list_item.view.*
 import kotlinx.android.synthetic.main.fragment_file_explorer.*
 import java.util.*
 import android.widget.TextView
+import filemanager.utils.FileUtils.Companion.getMediaFiles
+import java.util.concurrent.Executors
 
 
 /**
@@ -46,6 +43,9 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
     var mGridLayoutManager = GridLayoutManager(context, 3)
     var mLinearLayoutManager = LinearLayoutManager(context)
     var persistentSnackBar: Snackbar? = null
+    var executorService = Executors.newSingleThreadExecutor()
+    var mHandler = Handler()
+    lateinit var mProgressDialog : ProgressDialog
 
     companion object {
         const val ARG_PATH: String = "file_path"
@@ -60,6 +60,7 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
         if (activity == null) {
             return
         }
+        mProgressDialog = ProgressDialog(activity as Activity)
         mViewModel = ViewModelProviders.of(requireActivity()).get(FileViewModel::class.java)
         val filePath = arguments?.getString(ARG_PATH)
         if (filePath == null) {
@@ -67,7 +68,7 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
             return
         }
         filesListRv.layoutManager = mLinearLayoutManager
-        mFilesRvAdapter = FilesRvAdapter()
+        mFilesRvAdapter = FilesRvAdapter(activity as Activity)
         mFilesRvAdapter.onItemClickListener = this
         filesListRv.adapter = mFilesRvAdapter
         PATH = filePath
@@ -124,15 +125,23 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
         if (path == null) {
             return
         }
-        val files = convertFileToModel(getFiles(path))
-
-        if (files.isEmpty()) {
-            showErrorView()
-        } else {
-            showListView()
+        if (!mProgressDialog.isShowing) {
+            mProgressDialog.show()
         }
-
-        mFilesRvAdapter.updateData(files)
+        executorService.submit({
+            var files = getMediaFiles(activity as Activity, path)
+            mHandler.post({
+                if (mProgressDialog.isShowing) {
+                    mProgressDialog.dismiss()
+                }
+                if (files.isEmpty()) {
+                    showErrorView()
+                } else {
+                    showListView()
+                }
+                mFilesRvAdapter.updateData(files)
+            })
+        })
     }
 
     fun showErrorView() {
@@ -155,6 +164,7 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
         } else {
             titleItem1.text = resources.getText(R.string.files_title)
         }
+        iv3.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_newfolder, context?.getTheme()))
         iv3.visibility = View.VISIBLE
         iv2.setImageDrawable(VectorDrawableCompat.create(resources, R.drawable.ic_sort, context?.getTheme()))
         iv2.visibility = View.VISIBLE
@@ -188,12 +198,17 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
         if (mFilesRvAdapter.isLongPressMode) {
             toggleSelectItem(position, fileModel)
         } else {
-            if (fileModel.fileType == FileUtils.FileType.FOLDER) {
-                mViewModel?.mPathStack?.value?.push(fileModel.path)
+            if (fileModel.fileType == FileUtils.FileType.ROOT_IMAGE) {
+                mViewModel?.mPathStack?.value?.push(FileUtils.MediaType.IMAGE.name)
+                mViewModel?.mPathStack?.value = mViewModel?.mPathStack?.value
+            } else if (fileModel.fileType == FileUtils.FileType.ROOT_VIDEO) {
+                mViewModel?.mPathStack?.value?.push(FileUtils.MediaType.VIDEO.name)
+                mViewModel?.mPathStack?.value = mViewModel?.mPathStack?.value
+            } else if (fileModel.fileType == FileUtils.FileType.ROOT_AUDIO) {
+                mViewModel?.mPathStack?.value?.push(FileUtils.MediaType.AUDIO.name)
                 mViewModel?.mPathStack?.value = mViewModel?.mPathStack?.value
             }
         }
-        Log.d("onclick", fileModel.name)
     }
 
     fun toggleSelectItem(position : Int, fileModel: FileModel) {
@@ -207,7 +222,6 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
     }
 
     override fun onLongClick(position : Int, fileModel: FileModel) {
-        Log.d("onlongclick", fileModel.name)
         if (!mFilesRvAdapter.isLongPressMode) {
             mFilesRvAdapter.isLongPressMode = true
             fileModel.isSelected = !fileModel.isSelected
