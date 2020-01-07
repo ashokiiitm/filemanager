@@ -94,6 +94,7 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
         }
         iv3.setOnClickListener {
             NewFolderDialogFragment().show(activity?.supportFragmentManager, NewFolderDialogFragment::class.java.simpleName)
+            //MoreOptionsDialogFragment().show(activity?.supportFragmentManager, MoreOptionsDialogFragment::class.java.simpleName)
             /*getCustomizedSnackbar(resources.getString(R.string.backup_error1, 2),
                 resources.getString(R.string.backup_error_actiontext1), View.OnClickListener {  },
                 resources.getColor(R.color.color_ffffff), resources.getColor(R.color.color_d83a3a),

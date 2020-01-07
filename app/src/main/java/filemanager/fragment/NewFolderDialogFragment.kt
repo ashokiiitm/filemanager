@@ -16,9 +16,11 @@ import kotlinx.android.synthetic.main.new_folder_fragment.*
  * Created by Ashok on 2020-01-07.
  */
 class NewFolderDialogFragment : BottomSheetDialogFragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.new_folder_fragment, null, false)
     }
+
     override fun onStart() {
         super.onStart()
         var bottomSheet: View? = dialog?.findViewById(R.id.design_bottom_sheet)
