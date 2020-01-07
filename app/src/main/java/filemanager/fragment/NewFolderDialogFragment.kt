@@ -44,5 +44,6 @@ class NewFolderDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        newFolderEdit.hint = resources.getString(R.string.create_folder_hint)
     }
 }
