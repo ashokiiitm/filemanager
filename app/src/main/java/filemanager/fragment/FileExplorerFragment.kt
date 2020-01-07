@@ -93,7 +93,8 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
             mFilesRvAdapter.notifyDataSetChanged()
         }
         iv3.setOnClickListener {
-            getCustomizedSnackbar(resources.getString(R.string.backup_error1, 2),
+            NewFolderDialogFragment().show(activity?.supportFragmentManager, NewFolderDialogFragment::class.java.simpleName)
+            /*getCustomizedSnackbar(resources.getString(R.string.backup_error1, 2),
                 resources.getString(R.string.backup_error_actiontext1), View.OnClickListener {  },
                 resources.getColor(R.color.color_ffffff), resources.getColor(R.color.color_d83a3a),
                 resources.getColor(R.color.color_c72c2c),resources.getDrawable(R.drawable.ic_tick),
@@ -107,7 +108,7 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
                 actionPanel.visibility = View.VISIBLE
             } else {
                 actionPanel.visibility = View.GONE
-            }
+            }*/
         }
         selectAll.setOnClickListener {
             selectAll()

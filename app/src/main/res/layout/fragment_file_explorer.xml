@@ -151,7 +151,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="@string/empty_folder"/>
+            android:text="@string/please_try_again_later"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/noBackupLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/backup_onboarding"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tondo_bold"
+            android:textSize="22sp"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/color_393939"
+            android:text="@string/no_backups_title"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tondo_bold"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_696969"
+            android:text="@string/no_backups_desc"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tondo_bold"
+            android:layout_marginTop="24dp"
+            android:textSize="14sp"
+            android:textColor="@color/color_ffffff"
+            android:text="@string/try_now"
+            android:textAllCaps="true"
+            android:background="@drawable/rounded_bg_blue"
+            android:padding="12dp"/>
 
     </LinearLayout>
 

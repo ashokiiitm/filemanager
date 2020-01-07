@@ -4,7 +4,7 @@
     <string name="allowing_this_permission_will_help">Allowing this permission will help us improve
         your app experience. You can turn it off later at any time from Settings.</string>
     <string name="ok">OK</string>
-    <string name="empty_folder">Empty Folder</string>
+    <string name="please_try_again_later">Please try again later</string>
     <string name="select_all">Select All</string>
     <string name="all_files_title">All Files</string>
     <string name="files_title">Files</string>
@@ -20,4 +20,11 @@
     <string name="space_consumed_title">Space Consumed</string>
     <string name="space_consumed_value">%dMB Consumed</string>
     <string name="total_value">Out of %dGB</string>
+    <string name="no_backups_title">No Backups yet</string>
+    <string name="no_backups_desc">Keep your files or folders secure with Airtel Backup.</string>
+    <string name="try_now">Try Now</string>
+    <string name="new_folder">New Folder</string>
+    <string name="cancel_folder">Cancel</string>
+    <string name="create_folder">Create</string>
+    <string name="create_folder_hint">Folder Name</string>
 </resources>
