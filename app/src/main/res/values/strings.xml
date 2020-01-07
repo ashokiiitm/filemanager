@@ -15,4 +15,9 @@
     <string name="backup_success1">All files and folders are up to date.</string>
     <string name="skip_for_now">Skip For Now</string>
     <string name="backup_now">Backup Now</string>
+    <string name="cloud_storage_title">Cloud Storage</string>
+    <string name="manage_cloud_storage">Manage</string>
+    <string name="space_consumed_title">Space Consumed</string>
+    <string name="space_consumed_value">%dMB Consumed</string>
+    <string name="total_value">Out of %dGB</string>
 </resources>

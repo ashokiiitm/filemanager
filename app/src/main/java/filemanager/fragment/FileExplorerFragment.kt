@@ -118,6 +118,7 @@ class FileExplorerFragment : Fragment(), MainActivity.OnItemClickListener {
         backupNow.setOnClickListener {
             actionPanel.visibility = View.GONE
         }
+        viewStubHeader.inflate()
     }
 
     fun updateData() {
